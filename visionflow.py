@@ -21,16 +21,19 @@ if not cap.isOpened():
 cap.set(cv2.CAP_PROP_FPS, 30)
 
 csv_filename = 'TrafficRecords.csv'
+frames_dir = 'frames'
+
+os.makedirs(frames_dir, exist_ok=True)
 file_exists = os.path.exists(csv_filename)
 
 # Create CSV file if it doesn't exist
 with open(csv_filename, mode='a', newline='') as csv_file:
-    fieldnames = ['Timestamp', 'LicensePlate', 'PlateColor', 'Lane', 'VehicleType', 'Confidence']
+    fieldnames = ['Timestamp', 'LicensePlate', 'PlateColor', 'Lane', 'VehicleType', 'Confidence', 'FrameImage']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     if not file_exists:
         writer.writeheader()
 
-# Plate color check
+# Plate color detection
 def check_plate_color(plate_image):
     hsv_image = cv2.cvtColor(plate_image, cv2.COLOR_BGR2HSV)
     yellow_mask = cv2.inRange(hsv_image, (20, 100, 100), (30, 255, 255))
@@ -50,7 +53,7 @@ def check_plate_color(plate_image):
     else:
         return 'Unknown'
 
-# Traffic signal logic
+# Traffic logic
 lanes = ['R1', 'R2', 'R3', 'R4']
 vehicle_counts = {lane: 0 for lane in lanes}
 last_green_time = {lane: 0 for lane in lanes}
@@ -88,6 +91,8 @@ def update_signal():
         current_green_lane = max_lane
         last_switch_time = now
 
+# Main loop
+frame_id = 0
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
@@ -117,19 +122,23 @@ while cap.isOpened():
 
                         lane = random.choice(lanes)
                         detected_lanes[lane] += 1
-
-                        timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+                        timestamp = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+                        frame_filename = f"{frames_dir}/frame_{timestamp}_{text.replace(' ', '_')}.jpg"
+                        cv2.imwrite(frame_filename, frame)
 
                         # Save record to CSV
                         with open(csv_filename, mode='a', newline='') as csv_file:
-                            writer = csv.DictWriter(csv_file, fieldnames=['Timestamp', 'LicensePlate', 'PlateColor', 'Lane', 'VehicleType', 'Confidence'])
+                            writer = csv.DictWriter(csv_file, fieldnames=[
+                                'Timestamp', 'LicensePlate', 'PlateColor', 'Lane', 'VehicleType', 'Confidence', 'FrameImage'
+                            ])
                             writer.writerow({
-                                'Timestamp': timestamp,
+                                'Timestamp': timestamp.replace("_", " "),
                                 'LicensePlate': text,
                                 'PlateColor': plate_color,
                                 'Lane': lane,
                                 'VehicleType': label,
-                                'Confidence': round(prob, 2)
+                                'Confidence': round(prob, 2),
+                                'FrameImage': frame_filename
                             })
 
                         cv2.putText(frame, f'{text} ({plate_color})', (x1, y1 - 10),
@@ -150,9 +159,9 @@ while cap.isOpened():
         cv2.putText(frame, f'{lane}: {signal}', (10, 30 + i * 30),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
-
     cv2_imshow(frame)
     time.sleep(0.03)
+    frame_id += 1
 
 cap.release()
 cv2.destroyAllWindows()
