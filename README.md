@@ -1,5 +1,6 @@
 
-# 🚦 Smart Traffic Management System with License Plate Recognition
+# 🚦 Vision Flow - LPR System for Traffic Management
+#  Traffic management and priority vehicle guidance
 
 This project detects vehicles and license plates from traffic videos using **YOLOv5** and **EasyOCR**, identifies the **plate color**, and simulates **smart traffic signals**. Detection data is stored in a CSV file and frames are saved locally.
 
@@ -44,11 +45,12 @@ Make sure to have Python 3.8 or above.
 
 ```bash
 pip install -r requirements.txt
+pip install ultralytics, easyocr
 ```
 
 ### 4. Download or Place Required Files
 
-- ✅ Ensure `traffic_video2.mp4` is present in the directory.
+- ✅ Ensure that the video is added in the import placeholder for the program.
 - ✅ Place your YOLOv5 model file (`yolov5su.pt`) in the same directory.
 - 🚫 No need to create `frames/` or `TrafficRecords.csv` manually; they will be auto-created.
 
@@ -100,7 +102,7 @@ ultralytics
 
 ## ⚠️ Notes
 
-- You must have a GPU for optimal performance (for real-time YOLO + OCR).
+- You must have a GPU for optimal performance (for real-time YOLO + OCR) or you can use online freely available compilers. 
 - If running on **Google Colab**, replace `cv2.imshow` with `cv2_imshow` (already done in code).
 - `yolov5su.pt` is a lightweight YOLO model; you can use your custom-trained one.
 
