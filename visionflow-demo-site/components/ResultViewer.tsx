@@ -122,20 +122,12 @@ export function ResultViewer({
                   className="object-cover"
                 />
                 <div className="pointer-events-none absolute inset-0 z-10">
-                  <div className="absolute left-3 top-3 rounded-xl bg-slate-900/80 px-3 py-2 text-[0.65rem] text-slate-100 shadow-glow">
-                    <p className="font-semibold text-emerald-300">
-                      VisionFlow detections
-                    </p>
-                    <p className="mt-0.5 text-[0.65rem] text-slate-300">
-                      vehicles: 7 · plates: 3 · lanes: 3
-                    </p>
-                  </div>
                   <div className="absolute inset-6">
                     <div className="absolute left-[8%] top-[18%] h-[18%] w-[26%] rounded border border-emerald-400/90 shadow-[0_0_0_1px_rgba(16,185,129,0.5)]" />
                     <div className="absolute left-[42%] top-[30%] h-[20%] w-[28%] rounded border border-emerald-400/90 shadow-[0_0_0_1px_rgba(16,185,129,0.5)]" />
                     <div className="absolute left-[68%] top-[40%] h-[16%] w-[20%] rounded border border-emerald-400/90 shadow-[0_0_0_1px_rgba(16,185,129,0.5)]" />
-                    <div className="absolute bottom-3 right-3 rounded-full bg-slate-900/85 px-3 py-1.5 text-[0.65rem] text-slate-200">
-                      CSV output updated · lane load recomputed
+                    <div className="absolute bottom-3 right-3 rounded-full bg-slate-900/80 px-3 py-1.5 text-[0.6rem] text-slate-200">
+                      Conceptual overlay – real detections run in the Python app
                     </div>
                   </div>
                 </div>
