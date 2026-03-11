@@ -1,0 +1,20 @@
+node_modules/
+visionflow-demo-site/node_modules/
+.next/
+dist/
+.turbo/
+.vercel/
+npm-debug.log*
+yarn-error.log*
+
+# Python artifacts from core VisionFlow project
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.env
+TrafficRecords.csv
+frames/
+traffic_video*.mp4
+yolov5*.pt
+
