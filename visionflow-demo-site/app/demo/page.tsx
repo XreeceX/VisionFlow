@@ -6,13 +6,11 @@ import { useState } from "react";
 
 export default function DemoPage() {
   const [activeSample, setActiveSample] = useState<DemoSample | null>(null);
-  const [inputUrl, setInputUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleProcessingStart = (sample: DemoSample | null, fileUrl?: string) => {
+  const handleProcessingStart = (sample: DemoSample | null) => {
     setIsProcessing(true);
     setActiveSample(sample);
-    setInputUrl(fileUrl ?? sample?.inputPath ?? null);
 
     // Simulate model inference time
     setTimeout(() => {
@@ -27,9 +25,8 @@ export default function DemoPage() {
           Interactive demo
         </h1>
         <p className="mt-2 text-sm text-slate-400">
-          This page simulates the VisionFlow pipeline on curated sample frames
-          or an image you upload. Processing is visual-only and happens entirely
-          in your browser.
+          This page simulates the VisionFlow pipeline on a set of curated sample
+          frames that mirror real traffic scenarios processed by the Python app.
         </p>
       </div>
 
@@ -37,7 +34,7 @@ export default function DemoPage() {
         <DemoUploader onProcessingStart={handleProcessingStart} />
         <ResultViewer
           activeSample={activeSample}
-          inputUrl={inputUrl}
+          inputUrl={activeSample?.inputPath ?? null}
           isProcessing={isProcessing}
         />
       </div>

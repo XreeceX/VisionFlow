@@ -54,8 +54,8 @@ export function ResultViewer({
 }: ResultViewerProps) {
   const [progress, setProgress] = useState(0);
   const overlay = useMemo(
-    () => (inputUrl ? generateOverlayFromUrl(inputUrl) : null),
-    [inputUrl]
+    () => (inputUrl && !activeSample ? generateOverlayFromUrl(inputUrl) : null),
+    [inputUrl, activeSample]
   );
 
   useEffect(() => {
@@ -113,9 +113,9 @@ export function ResultViewer({
             Input frame
           </p>
           <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
-            {inputUrl || activeSample ? (
+            {activeSample ? (
               <Image
-                src={inputUrl || activeSample?.inputPath || ""}
+                src={activeSample.inputPath}
                 alt="Input traffic frame"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -123,7 +123,7 @@ export function ResultViewer({
               />
             ) : (
               <div className="flex h-full items-center justify-center text-[0.7rem] text-slate-500">
-                Select a sample or upload a frame
+                Choose a sample to preview
               </div>
             )}
           </div>
