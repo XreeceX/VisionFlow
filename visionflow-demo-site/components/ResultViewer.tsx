@@ -123,35 +123,66 @@ export function ResultViewer({
                 />
                 <div className="pointer-events-none absolute inset-0 z-10">
                   <div className="absolute inset-5">
-                    {/* detection boxes */}
+                    {/* lane signals – matches VisionFlow Python overlay */}
+                    <div className="absolute left-2 top-2 space-y-1 text-[0.7rem] font-semibold text-slate-100 drop-shadow">
+                      <p>
+                        R1: <span className="text-emerald-400">🟢</span>
+                      </p>
+                      <p>
+                        R2: <span className="text-rose-400">🔴</span>
+                      </p>
+                      <p>
+                        R3: <span className="text-rose-400">🔴</span>
+                      </p>
+                      <p>
+                        R4: <span className="text-rose-400">🔴</span>
+                      </p>
+                    </div>
+
+                    {/* detection boxes with plate + colour labels */}
                     <div className="absolute left-[10%] top-[20%] h-[18%] w-[24%] rounded border-2 border-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.7)]">
-                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/90 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
-                        PLT-3821 · YELLOW
+                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/95 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
+                        PLT-3821 (Yellow)
+                      </div>
+                      <div className="absolute -bottom-5 left-0 text-[0.55rem] font-semibold text-emerald-300">
+                        car · conf 0.91
                       </div>
                     </div>
                     <div className="absolute left-[45%] top-[33%] h-[20%] w-[26%] rounded border-2 border-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.7)]">
-                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/90 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
-                        PLT-9042 · WHITE
+                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/95 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
+                        PLT-9042 (White)
+                      </div>
+                      <div className="absolute -bottom-5 left-0 text-[0.55rem] font-semibold text-emerald-300">
+                        van · conf 0.88
                       </div>
                     </div>
                     <div className="absolute left-[70%] top-[42%] h-[16%] w-[18%] rounded border-2 border-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.7)]">
-                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/90 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
-                        PLT-7710 · RED
+                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/95 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
+                        PLT-7710 (Red)
+                      </div>
+                      <div className="absolute -bottom-5 left-0 text-[0.55rem] font-semibold text-emerald-300">
+                        emergency · conf 0.95
                       </div>
                     </div>
 
-                    {/* CSV-style summary */}
-                    <div className="absolute bottom-3 left-3 rounded-xl bg-slate-950/80 px-3 py-2 text-[0.6rem] text-slate-100 backdrop-blur shadow-glow">
-                      <div className="flex gap-4">
+                    {/* CSV-style summary using real CSV field names */}
+                    <div className="absolute bottom-3 left-3 rounded-xl bg-slate-950/85 px-3 py-2 text-[0.6rem] text-slate-100 backdrop-blur shadow-glow">
+                      <div className="grid grid-cols-6 gap-3">
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
-                            Plate
+                            Timestamp
+                          </p>
+                          <p>2026-03-11 20:56:00</p>
+                        </div>
+                        <div>
+                          <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
+                            LicensePlate
                           </p>
                           <p>PLT-3821</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
-                            Colour
+                            PlateColor
                           </p>
                           <p>Yellow</p>
                         </div>
@@ -159,23 +190,23 @@ export function ResultViewer({
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             Lane
                           </p>
-                          <p>2</p>
+                          <p>R2</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
-                            Vehicle
+                            VehicleType
                           </p>
-                          <p>Car</p>
+                          <p>car</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
-                            Conf.
+                            Confidence
                           </p>
                           <p>0.93</p>
                         </div>
                       </div>
                       <p className="mt-1 text-[0.55rem] text-slate-400">
-                        Demo overlay in browser – real detections come from the Python pipeline.
+                        Fields mirror rows written to TrafficRecords.csv in the Python VisionFlow pipeline.
                       </p>
                     </div>
                   </div>
