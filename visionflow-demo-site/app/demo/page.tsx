@@ -1,7 +1,7 @@
-import { DemoUploader, type DemoSample } from "@/components/DemoUploader";
-import { ResultViewer } from "@/components/ResultViewer";
 "use client";
 
+import { DemoUploader, type DemoSample } from "@/components/DemoUploader";
+import { ResultViewer } from "@/components/ResultViewer";
 import { useState } from "react";
 
 export default function DemoPage() {
