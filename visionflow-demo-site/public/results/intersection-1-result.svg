@@ -6,32 +6,47 @@
     </linearGradient>
   </defs>
   <rect width="640" height="360" fill="url(#bg4)" />
-  <rect x="200" y="0" width="80" height="360" fill="#030712" />
-  <rect x="360" y="0" width="80" height="360" fill="#030712" />
-  <rect x="0" y="140" width="640" height="80" fill="#030712" />
-  <rect x="225" y="150" width="10" height="60" fill="#374151" />
-  <rect x="255" y="150" width="10" height="60" fill="#374151" />
-  <rect x="375" y="150" width="10" height="60" fill="#374151" />
-  <rect x="405" y="150" width="10" height="60" fill="#374151" />
-  <rect x="238" y="218" width="50" height="28" rx="6" fill="none" stroke="#22C55E" stroke-width="2.4" />
-  <rect x="248" y="223" width="30" height="8" rx="2" fill="#FACC15" />
-  <circle cx="260" cy="230" r="2" fill="#111827" />
-  <rect x="350" y="120" width="52" height="26" rx="5" fill="none" stroke="#22C55E" stroke-width="2.4" />
-  <rect x="358" y="124" width="32" height="9" rx="2" fill="#F97316" />
-  <circle cx="372" cy="130" r="2" fill="#111827" />
-  <rect x="138" y="188" width="44" height="24" rx="6" fill="none" stroke="#22C55E" stroke-width="2.4" />
-  <rect x="145" y="193" width="26" height="7" rx="2" fill="#E5E7EB" />
-  <circle cx="157" cy="199" r="1.8" fill="#111827" />
-  <rect x="474" y="148" width="44" height="24" rx="6" fill="none" stroke="#22C55E" stroke-width="2.4" />
-  <rect x="481" y="153" width="26" height="7" rx="2" fill="#E5E7EB" />
-  <circle cx="493" cy="159" r="1.8" fill="#111827" />
-  <rect x="308" y="40" width="8" height="26" rx="2" fill="#111827" />
-  <circle cx="312" cy="54" r="6" fill="#22C55E" />
-  <circle cx="312" cy="44" r="6" fill="#4B5563" />
-  <circle cx="312" cy="64" r="6" fill="#4B5563" />
-  <rect x="292" y="290" width="110" height="26" rx="13" fill="#020617" stroke="#1D4ED8" stroke-width="1.5" />
-  <text x="302" y="305" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="10" fill="#E5E7EB">
-    4 lanes " 7 vehicles " 3 plates
+
+  <!-- vertical and horizontal roads -->
+  <rect x="220" y="0" width="80" height="360" fill="#030712" />
+  <rect x="340" y="0" width="80" height="360" fill="#030712" />
+  <rect x="0" y="150" width="640" height="60" fill="#030712" />
+
+  <!-- center markings -->
+  <rect x="312" y="0" width="4" height="150" fill="#111827" opacity="0.6" />
+  <rect x="312" y="210" width="4" height="150" fill="#111827" opacity="0.6" />
+  <rect x="0" y="178" width="210" height="4" fill="#111827" opacity="0.6" />
+  <rect x="430" y="178" width="210" height="4" fill="#111827" opacity="0.6" />
+
+  <!-- cars with green detection boxes -->
+  <!-- top inbound -->
+  <rect x="284" y="66" width="48" height="26" rx="6" fill="none" stroke="#22C55E" stroke-width="2" />
+  <rect x="292" y="74" width="24" height="6" rx="2" fill="#FACC15" />
+  <rect x="320" y="74" width="12" height="6" rx="2" fill="#F97316" />
+
+  <!-- bottom inbound -->
+  <rect x="284" y="226" width="48" height="26" rx="6" fill="none" stroke="#22C55E" stroke-width="2" />
+  <rect x="292" y="234" width="24" height="6" rx="2" fill="#FACC15" />
+  <rect x="320" y="234" width="12" height="6" rx="2" fill="#F97316" />
+
+  <!-- left inbound -->
+  <rect x="146" y="164" width="48" height="26" rx="6" fill="none" stroke="#22C55E" stroke-width="2" />
+  <rect x="154" y="172" width="24" height="6" rx="2" fill="#FACC15" />
+
+  <!-- right inbound -->
+  <rect x="446" y="164" width="48" height="26" rx="6" fill="none" stroke="#22C55E" stroke-width="2" />
+  <rect x="454" y="172" width="24" height="6" rx="2" fill="#FACC15" />
+
+  <!-- traffic signal with annotated green -->
+  <rect x="310" y="110" width="8" height="30" rx="2" fill="#111827" />
+  <circle cx="314" cy="118" r="5" fill="#4B5563" />
+  <circle cx="314" cy="130" r="5" fill="#22C55E" />
+  <circle cx="314" cy="142" r="5" fill="#4B5563" />
+
+  <!-- legend text bubble -->
+  <rect x="390" y="280" width="180" height="40" rx="16" fill="#020617" stroke="#1D4ED8" stroke-width="1.5" />
+  <text x="402" y="303" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#E5E7EB">
+    4 lanes · 4 vehicles · 3 plates
   </text>
 </svg>
 

@@ -6,36 +6,47 @@
     </linearGradient>
   </defs>
   <rect width="640" height="360" fill="url(#bg)" />
-  <rect x="200" y="0" width="80" height="360" fill="#020617" />
-  <rect x="360" y="0" width="80" height="360" fill="#020617" />
-  <rect x="0" y="140" width="640" height="80" fill="#020617" />
-  <rect x="225" y="150" width="10" height="60" fill="#374151" />
-  <rect x="255" y="150" width="10" height="60" fill="#374151" />
-  <rect x="375" y="150" width="10" height="60" fill="#374151" />
-  <rect x="405" y="150" width="10" height="60" fill="#374151" />
-  <rect x="240" y="220" width="46" height="24" rx="4" fill="#1F2937" />
-  <rect x="238" y="218" width="50" height="28" rx="6" fill="none" stroke="#4B5563" stroke-width="2" />
-  <rect x="248" y="223" width="30" height="8" rx="2" fill="#FACC15" />
-  <circle cx="260" cy="230" r="2" fill="#111827" />
-  <rect x="350" y="120" width="52" height="26" rx="5" fill="#1F2937" />
-  <rect x="348" y="118" width="56" height="30" rx="7" fill="none" stroke="#4B5563" stroke-width="2" />
-  <rect x="358" y="124" width="32" height="9" rx="2" fill="#F97316" />
-  <circle cx="372" cy="130" r="2" fill="#111827" />
-  <rect x="140" y="190" width="40" height="20" rx="4" fill="#1F2937" />
-  <rect x="138" y="188" width="44" height="24" rx="6" fill="none" stroke="#4B5563" stroke-width="2" />
-  <rect x="145" y="193" width="26" height="7" rx="2" fill="#E5E7EB" />
-  <circle cx="157" cy="199" r="1.8" fill="#111827" />
-  <rect x="476" y="150" width="40" height="20" rx="4" fill="#1F2937" />
-  <rect x="474" y="148" width="44" height="24" rx="6" fill="none" stroke="#4B5563" stroke-width="2" />
-  <rect x="481" y="153" width="26" height="7" rx="2" fill="#E5E7EB" />
-  <circle cx="493" cy="159" r="1.8" fill="#111827" />
-  <rect x="308" y="40" width="8" height="26" rx="2" fill="#111827" />
-  <circle cx="312" cy="54" r="6" fill="#22C55E" />
-  <circle cx="312" cy="44" r="6" fill="#4B5563" />
-  <circle cx="312" cy="64" r="6" fill="#4B5563" />
-  <rect x="292" y="290" width="56" height="20" rx="10" fill="#0F172A" stroke="#22C55E" stroke-width="1.5" />
-  <circle cx="304" cy="300" r="4" fill="#22C55E" />
-  <circle cx="320" cy="300" r="4" fill="#FACC15" />
-  <circle cx="336" cy="300" r="4" fill="#EF4444" />
+
+  <!-- vertical and horizontal roads -->
+  <rect x="220" y="0" width="80" height="360" fill="#020617" />
+  <rect x="340" y="0" width="80" height="360" fill="#020617" />
+  <rect x="0" y="150" width="640" height="60" fill="#020617" />
+
+  <!-- center markings -->
+  <rect x="312" y="0" width="4" height="150" fill="#111827" opacity="0.6" />
+  <rect x="312" y="210" width="4" height="150" fill="#111827" opacity="0.6" />
+  <rect x="0" y="178" width="210" height="4" fill="#111827" opacity="0.6" />
+  <rect x="430" y="178" width="210" height="4" fill="#111827" opacity="0.6" />
+
+  <!-- simple car icons (before detection) -->
+  <!-- top inbound -->
+  <rect x="288" y="70" width="40" height="18" rx="4" fill="#0F172A" />
+  <rect x="296" y="76" width="24" height="6" rx="2" fill="#E5E7EB" />
+
+  <!-- bottom inbound -->
+  <rect x="288" y="230" width="40" height="18" rx="4" fill="#0F172A" />
+  <rect x="296" y="236" width="24" height="6" rx="2" fill="#E5E7EB" />
+
+  <!-- left inbound -->
+  <rect x="150" y="168" width="40" height="18" rx="4" fill="#0F172A" />
+  <rect x="158" y="174" width="24" height="6" rx="2" fill="#E5E7EB" />
+
+  <!-- right inbound -->
+  <rect x="450" y="168" width="40" height="18" rx="4" fill="#0F172A" />
+  <rect x="458" y="174" width="24" height="6" rx="2" fill="#E5E7EB" />
+
+  <!-- traffic signal -->
+  <rect x="310" y="110" width="8" height="30" rx="2" fill="#111827" />
+  <circle cx="314" cy="118" r="5" fill="#4B5563" />
+  <circle cx="314" cy="130" r="5" fill="#22C55E" />
+  <circle cx="314" cy="142" r="5" fill="#4B5563" />
+
+  <!-- legend text -->
+  <text x="24" y="40" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#E5E7EB">
+    Before VisionFlow
+  </text>
+  <text x="24" y="60" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#9CA3AF">
+    Multiple vehicles arrive at the junction, but lanes are not yet analysed.
+  </text>
 </svg>
 
