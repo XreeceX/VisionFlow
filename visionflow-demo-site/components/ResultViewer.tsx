@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { DemoSample } from "./DemoUploader";
 
 type ResultViewerProps = {
@@ -10,12 +10,53 @@ type ResultViewerProps = {
   isProcessing: boolean;
 };
 
+type GeneratedOverlay = {
+  timestamp: string;
+  plate: string;
+  color: "Red" | "Yellow" | "White";
+  lane: "R1" | "R2" | "R3" | "R4";
+  vehicleType: "car" | "truck" | "bus" | "motorbike";
+  confidence: number;
+};
+
+function generateOverlayFromUrl(url: string): GeneratedOverlay {
+  let hash = 0;
+  for (let i = 0; i < url.length; i += 1) {
+    hash = (hash * 31 + url.charCodeAt(i)) >>> 0;
+  }
+
+  const colors: GeneratedOverlay["color"][] = ["Red", "Yellow", "White"];
+  const lanes: GeneratedOverlay["lane"][] = ["R1", "R2", "R3", "R4"];
+  const vehicles: GeneratedOverlay["vehicleType"][] = [
+    "car",
+    "truck",
+    "bus",
+    "motorbike"
+  ];
+
+  const plateNumber = 1000 + (hash % 8999);
+  const plate = `PLT-${plateNumber}`;
+  const color = colors[hash % colors.length];
+  const lane = lanes[(hash >> 3) % lanes.length];
+  const vehicleType = vehicles[(hash >> 5) % vehicles.length];
+  const confidence = Math.round((0.8 + (hash % 20) / 100) * 100) / 100;
+
+  const date = new Date();
+  const timestamp = date.toISOString().replace("T", " ").slice(0, 19);
+
+  return { timestamp, plate, color, lane, vehicleType, confidence };
+}
+
 export function ResultViewer({
   activeSample,
   inputUrl,
   isProcessing
 }: ResultViewerProps) {
   const [progress, setProgress] = useState(0);
+  const overlay = useMemo(
+    () => (inputUrl ? generateOverlayFromUrl(inputUrl) : null),
+    [inputUrl]
+  );
 
   useEffect(() => {
     if (!isProcessing) {
@@ -112,7 +153,7 @@ export function ResultViewer({
               />
             )}
 
-            {showResult && !activeSample && inputUrl && (
+            {showResult && !activeSample && inputUrl && overlay && (
               <>
                 <Image
                   src={inputUrl}
@@ -142,28 +183,14 @@ export function ResultViewer({
                     {/* detection boxes with plate + colour labels */}
                     <div className="absolute left-[10%] top-[20%] h-[18%] w-[24%] rounded border-2 border-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.7)]">
                       <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/95 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
-                        PLT-3821 (Yellow)
+                        {overlay.plate} ({overlay.color})
                       </div>
                       <div className="absolute -bottom-5 left-0 text-[0.55rem] font-semibold text-emerald-300">
-                        car · conf 0.91
+                        {overlay.vehicleType} · conf {overlay.confidence.toFixed(2)}
                       </div>
                     </div>
-                    <div className="absolute left-[45%] top-[33%] h-[20%] w-[26%] rounded border-2 border-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.7)]">
-                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/95 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
-                        PLT-9042 (White)
-                      </div>
-                      <div className="absolute -bottom-5 left-0 text-[0.55rem] font-semibold text-emerald-300">
-                        van · conf 0.88
-                      </div>
-                    </div>
-                    <div className="absolute left-[70%] top-[42%] h-[16%] w-[18%] rounded border-2 border-emerald-400 shadow-[0_0_0_1px_rgba(16,185,129,0.7)]">
-                      <div className="absolute -top-5 left-0 rounded-md bg-emerald-500/95 px-1.5 py-0.5 text-[0.55rem] font-semibold text-slate-900">
-                        PLT-7710 (Red)
-                      </div>
-                      <div className="absolute -bottom-5 left-0 text-[0.55rem] font-semibold text-emerald-300">
-                        emergency · conf 0.95
-                      </div>
-                    </div>
+                    <div className="absolute left-[45%] top-[33%] h-[20%] w-[26%] rounded border-2 border-emerald-400/70 shadow-[0_0_0_1px_rgba(16,185,129,0.5)]" />
+                    <div className="absolute left-[70%] top-[42%] h-[16%] w-[18%] rounded border-2 border-emerald-400/50 shadow-[0_0_0_1px_rgba(16,185,129,0.4)]" />
 
                     {/* CSV-style summary using real CSV field names */}
                     <div className="absolute bottom-3 left-3 rounded-xl bg-slate-950/85 px-3 py-2 text-[0.6rem] text-slate-100 backdrop-blur shadow-glow">
@@ -172,37 +199,37 @@ export function ResultViewer({
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             Timestamp
                           </p>
-                          <p>2026-03-11 20:56:00</p>
+                          <p>{overlay.timestamp}</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             LicensePlate
                           </p>
-                          <p>PLT-3821</p>
+                          <p>{overlay.plate}</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             PlateColor
                           </p>
-                          <p>Yellow</p>
+                          <p>{overlay.color}</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             Lane
                           </p>
-                          <p>R2</p>
+                          <p>{overlay.lane}</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             VehicleType
                           </p>
-                          <p>car</p>
+                          <p>{overlay.vehicleType}</p>
                         </div>
                         <div>
                           <p className="text-[0.55rem] uppercase tracking-wide text-slate-400">
                             Confidence
                           </p>
-                          <p>0.93</p>
+                          <p>{overlay.confidence.toFixed(2)}</p>
                         </div>
                       </div>
                       <p className="mt-1 text-[0.55rem] text-slate-400">
