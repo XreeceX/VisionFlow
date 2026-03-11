@@ -112,15 +112,19 @@ export function ResultViewer({
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
             Input frame
           </p>
-          <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
+          <div className="relative aspect-video rounded-xl border border-slate-800 bg-slate-950/80 px-4 py-3">
             {activeSample ? (
-              <Image
-                src={activeSample.inputPath}
-                alt="Input traffic frame"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
+              <div className="relative h-full w-full rounded-lg bg-slate-950/80">
+                <div className="relative mx-auto h-[88%] w-[92%] overflow-hidden rounded-lg border border-slate-800/80">
+                  <Image
+                    src={activeSample.inputPath}
+                    alt="Input traffic frame"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
             ) : (
               <div className="flex h-full items-center justify-center text-[0.7rem] text-slate-500">
                 Choose a sample to preview
@@ -133,7 +137,7 @@ export function ResultViewer({
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
             VisionFlow visualisation
           </p>
-          <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
+          <div className="relative aspect-video rounded-xl border border-slate-800 bg-slate-950/80 px-4 py-3">
             {isProcessing && (
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2 bg-slate-950/60 backdrop-blur">
                 <div className="h-10 w-10 animate-spin-slow rounded-full border-2 border-accent border-t-transparent" />
@@ -144,13 +148,17 @@ export function ResultViewer({
             )}
 
             {showResult && activeSample && (
-              <Image
-                src={activeSample.resultPath}
-                alt="VisionFlow processed output"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
+              <div className="relative h-full w-full rounded-lg bg-slate-950/80">
+                <div className="relative mx-auto h-[88%] w-[92%] overflow-hidden rounded-lg border border-slate-800/80">
+                  <Image
+                    src={activeSample.resultPath}
+                    alt="VisionFlow processed output"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
             )}
 
             {showResult && !activeSample && inputUrl && overlay && (
